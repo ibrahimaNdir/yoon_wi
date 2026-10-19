@@ -1,16 +1,14 @@
-# yoon_wi
+# Yoon Wi
 
-A new Flutter project.
+Application mobile (Flutter) qui guide les déplacements en transports en commun à Dakar : TER, BRT, Bus Tata et Dakar Dem Dikk.
 
-## Getting Started
+## Lancer le projet
+flutter pub get
+flutter run
 
-This project is a starting point for a Flutter application.
+## Architecture
+Clean Architecture par fonctionnalité (data, domain, presentation) avec Bloc.
+Phase actuelle : front avec données locales, back-end à connecter plus tard.
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Branches
+Une branche par fonctionnalité : feature/nom, fusionnée dans main par Pull Request.
