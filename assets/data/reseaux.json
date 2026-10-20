@@ -8,7 +8,11 @@
           "code": "B1",
           "nom": "Ligne B1",
           "tarif": 300,
-          "arrets": ["Guédiawaye", "Arrêt B", "Arrêt C", "Petersen"]
+          "attente_min": 3,
+          "attente_max": 6,
+          "arret_min": 2,
+          "arret_max": 3,
+          "arrets": ["Guédiawaye", "Arrêt B", "Colobane", "Petersen"]
         }
       ]
     },
@@ -19,6 +23,10 @@
           "code": "Ligne 24",
           "nom": "Ligne 24",
           "tarif": 150,
+          "attente_min": 5,
+          "attente_max": 12,
+          "arret_min": 3,
+          "arret_max": 5,
           "arrets": ["UCAD", "Fann", "Colobane", "HLM", "Parcelles Assainies"]
         }
       ]
@@ -30,13 +38,21 @@
           "code": "Ligne 10",
           "nom": "Ligne 10",
           "tarif": 150,
-          "arrets": ["Arrêt A", "Arrêt B", "Arrêt C"]
+          "attente_min": 10,
+          "attente_max": 20,
+          "arret_min": 3,
+          "arret_max": 4,
+          "arrets": ["Colobane", "Arrêt A", "Arrêt B", "Arrêt C", "Sandaga"]
         },
         {
           "code": "Ligne 15",
           "nom": "Ligne 15",
           "tarif": 150,
-          "arrets": ["Arrêt X", "Arrêt Y"]
+          "attente_min": 6,
+          "attente_max": 12,
+          "arret_min": 3,
+          "arret_max": 4,
+          "arrets": ["Petersen", "Sandaga"]
         }
       ]
     },
@@ -47,7 +63,11 @@
           "code": "Dakar – Diamniadio",
           "nom": "Dakar – Diamniadio",
           "tarif": 1500,
-          "arrets": ["Dakar", "Arrêt B", "Arrêt C", "Diamniadio"]
+          "attente_min": 10,
+          "attente_max": 20,
+          "arret_min": 4,
+          "arret_max": 6,
+          "arrets": ["Dakar", "Petersen", "Arrêt C", "Diamniadio"]
         }
       ]
     }

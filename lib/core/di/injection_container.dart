@@ -30,6 +30,10 @@ import 'package:yoon_wi/features/search/domain/repositories/place_repository.dar
 import 'package:yoon_wi/features/search/domain/usecases/search_places.dart';
 import 'package:yoon_wi/features/search/presentation/bloc/place_search_cubit.dart';
 import 'package:yoon_wi/features/search/presentation/bloc/search_form_cubit.dart';
+import 'package:yoon_wi/features/itinerary/data/repositories/itinerary_repository_impl.dart';
+import 'package:yoon_wi/features/itinerary/domain/engine/route_planner.dart';
+import 'package:yoon_wi/features/itinerary/domain/repositories/itinerary_repository.dart';
+import 'package:yoon_wi/features/itinerary/domain/usecases/find_itineraries.dart';
 
 final sl = GetIt.instance;
 
@@ -83,4 +87,11 @@ Future<void> initDependencies() async {
   sl.registerFactory(() => PlaceSearchCubit(sl()));
   // Un seul formulaire partagé par l'écran et les pages de choix
   sl.registerLazySingleton(() => SearchFormCubit());
+
+  // Itinéraire
+  sl.registerLazySingleton<RoutePlanner>(() => LocalRoutePlanner());
+  sl.registerLazySingleton<ItineraryRepository>(
+    () => ItineraryRepositoryImpl(networks: sl(), hubs: sl(), planner: sl()),
+  );
+  sl.registerLazySingleton(() => FindItineraries(sl()));
 }
