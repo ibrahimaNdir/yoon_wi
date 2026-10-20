@@ -11,6 +11,10 @@ import 'package:yoon_wi/features/onboarding/presentation/pages/permissions_page.
 import 'package:yoon_wi/features/onboarding/presentation/pages/welcome_page.dart';
 import 'package:yoon_wi/features/search/presentation/pages/search_page.dart';
 import 'package:yoon_wi/features/settings/presentation/pages/profile_page.dart';
+import 'package:yoon_wi/features/search/presentation/bloc/search_form_state.dart';
+import 'package:yoon_wi/features/search/presentation/pages/place_picker_page.dart';
+import 'package:yoon_wi/features/search/presentation/pages/preferences_page.dart';
+import 'package:yoon_wi/features/search/presentation/pages/time_picker_page.dart';
 
 GoRouter createAppRouter({bool showOnboarding = false}) {
   final rootKey = GlobalKey<NavigatorState>();
@@ -42,6 +46,30 @@ GoRouter createAppRouter({bool showOnboarding = false}) {
               GoRoute(
                 path: RouteNames.search,
                 builder: (context, state) => const SearchPage(),
+                routes: [
+                  // Ces pages s'affichent par-dessus la barre du bas.
+                  GoRoute(
+                    path: 'place',
+                    parentNavigatorKey: rootKey,
+                    builder:
+                        (context, state) => PlacePickerPage(
+                          field:
+                              state.uri.queryParameters['field'] == 'to'
+                                  ? SearchField.to
+                                  : SearchField.from,
+                        ),
+                  ),
+                  GoRoute(
+                    path: 'time',
+                    parentNavigatorKey: rootKey,
+                    builder: (context, state) => const TimePickerPage(),
+                  ),
+                  GoRoute(
+                    path: 'preferences',
+                    parentNavigatorKey: rootKey,
+                    builder: (context, state) => const PreferencesPage(),
+                  ),
+                ],
               ),
             ],
           ),

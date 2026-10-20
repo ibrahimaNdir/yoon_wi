@@ -24,6 +24,12 @@ import 'package:yoon_wi/features/hubs/domain/usecases/get_hub.dart';
 import 'package:yoon_wi/features/hubs/domain/usecases/get_hubs.dart';
 import 'package:yoon_wi/features/hubs/presentation/bloc/hub_cubit.dart';
 import 'package:yoon_wi/features/hubs/presentation/bloc/hubs_cubit.dart';
+import 'package:yoon_wi/features/search/data/datasources/place_local_datasource.dart';
+import 'package:yoon_wi/features/search/data/repositories/place_repository_impl.dart';
+import 'package:yoon_wi/features/search/domain/repositories/place_repository.dart';
+import 'package:yoon_wi/features/search/domain/usecases/search_places.dart';
+import 'package:yoon_wi/features/search/presentation/bloc/place_search_cubit.dart';
+import 'package:yoon_wi/features/search/presentation/bloc/search_form_cubit.dart';
 
 final sl = GetIt.instance;
 
@@ -67,4 +73,14 @@ Future<void> initDependencies() async {
   sl.registerLazySingleton(() => GetHub(sl()));
   sl.registerFactory(() => HubsCubit(sl()));
   sl.registerFactory(() => HubCubit(sl()));
+
+  // Recherche
+  sl.registerLazySingleton<PlaceLocalDataSource>(
+    () => PlaceLocalDataSourceImpl(sl()),
+  );
+  sl.registerLazySingleton<PlaceRepository>(() => PlaceRepositoryImpl(sl()));
+  sl.registerLazySingleton(() => SearchPlaces(sl()));
+  sl.registerFactory(() => PlaceSearchCubit(sl()));
+  // Un seul formulaire partagé par l'écran et les pages de choix
+  sl.registerLazySingleton(() => SearchFormCubit());
 }

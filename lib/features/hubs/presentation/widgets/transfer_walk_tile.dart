@@ -14,7 +14,8 @@ class TransferWalkTile extends StatelessWidget {
   Widget build(BuildContext context) {
     final t = transfer;
     return Semantics(
-      label: 'De ${t.from.label} vers ${t.to.label} : '
+      label:
+          'De ${t.from.label} vers ${t.to.label} : '
           '${t.walkMinutes} minutes de marche',
       excludeSemantics: true,
       child: Container(
@@ -34,14 +35,19 @@ class TransferWalkTile extends StatelessWidget {
               crossAxisAlignment: WrapCrossAlignment.center,
               children: [
                 TransportChip(t.from),
-                const Icon(Icons.arrow_forward,
-                    size: 18, color: AppColors.muted),
+                const Icon(
+                  Icons.arrow_forward,
+                  size: 18,
+                  color: AppColors.muted,
+                ),
                 TransportChip(t.to),
               ],
             ),
             const SizedBox(height: 8),
-            Text('${DurationFormatter.minutes(t.walkMinutes)} de marche',
-                style: AppTextStyles.bodyMuted),
+            Text(
+              '${DurationFormatter.minutes(t.walkMinutes)} de marche',
+              style: AppTextStyles.bodyMuted,
+            ),
           ],
         ),
       ),
