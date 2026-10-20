@@ -11,4 +11,11 @@ enum TransportMode {
   const TransportMode(this.label, this.color);
   final String label;
   final Color color;
+
+  static TransportMode? fromLabel(String label) {
+    for (final mode in values) {
+      if (mode.label == label) return mode;
+    }
+    return null;
+  }
 }
