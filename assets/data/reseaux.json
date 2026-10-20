@@ -1,0 +1,55 @@
+{
+  "version": 1,
+  "reseaux": [
+    {
+      "type": "BRT",
+      "lignes": [
+        {
+          "code": "B1",
+          "nom": "Ligne B1",
+          "tarif": 300,
+          "arrets": ["Guédiawaye", "Arrêt B", "Arrêt C", "Petersen"]
+        }
+      ]
+    },
+    {
+      "type": "Bus Tata",
+      "lignes": [
+        {
+          "code": "Ligne 24",
+          "nom": "Ligne 24",
+          "tarif": 150,
+          "arrets": ["UCAD", "Fann", "Colobane", "HLM", "Parcelles Assainies"]
+        }
+      ]
+    },
+    {
+      "type": "Dakar Dem Dikk",
+      "lignes": [
+        {
+          "code": "Ligne 10",
+          "nom": "Ligne 10",
+          "tarif": 150,
+          "arrets": ["Arrêt A", "Arrêt B", "Arrêt C"]
+        },
+        {
+          "code": "Ligne 15",
+          "nom": "Ligne 15",
+          "tarif": 150,
+          "arrets": ["Arrêt X", "Arrêt Y"]
+        }
+      ]
+    },
+    {
+      "type": "TER",
+      "lignes": [
+        {
+          "code": "Dakar – Diamniadio",
+          "nom": "Dakar – Diamniadio",
+          "tarif": 1500,
+          "arrets": ["Dakar", "Arrêt B", "Arrêt C", "Diamniadio"]
+        }
+      ]
+    }
+  ]
+}
