@@ -13,4 +13,7 @@ class RouteNames {
 
   static String stopsOf(String type, String line) =>
       '${linesOf(type)}/${Uri.encodeComponent(line)}';
+  static const hubs = '/hubs';
+
+  static String hubOf(String id) => '$hubs/${Uri.encodeComponent(id)}';
 }
