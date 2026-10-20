@@ -1,7 +1,10 @@
+import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:yoon_wi/core/router/app_shell.dart';
 import 'package:yoon_wi/core/router/route_names.dart';
 import 'package:yoon_wi/features/favorites/presentation/pages/favorites_page.dart';
+import 'package:yoon_wi/features/networks/presentation/pages/lines_page.dart';
+import 'package:yoon_wi/features/networks/presentation/pages/stops_page.dart';
 import 'package:yoon_wi/features/networks/presentation/pages/types_page.dart';
 import 'package:yoon_wi/features/onboarding/presentation/pages/permissions_page.dart';
 import 'package:yoon_wi/features/onboarding/presentation/pages/welcome_page.dart';
@@ -9,7 +12,10 @@ import 'package:yoon_wi/features/search/presentation/pages/search_page.dart';
 import 'package:yoon_wi/features/settings/presentation/pages/profile_page.dart';
 
 GoRouter createAppRouter({bool showOnboarding = false}) {
+  final rootKey = GlobalKey<NavigatorState>();
+
   return GoRouter(
+    navigatorKey: rootKey,
     initialLocation: showOnboarding ? RouteNames.welcome : RouteNames.search,
     routes: [
       GoRoute(
@@ -38,6 +44,27 @@ GoRouter createAppRouter({bool showOnboarding = false}) {
               GoRoute(
                 path: RouteNames.networks,
                 builder: (context, state) => const TypesPage(),
+                routes: [
+                  // Lignes et arrêts s'affichent par-dessus la barre du bas.
+                  GoRoute(
+                    path: ':type',
+                    parentNavigatorKey: rootKey,
+                    builder:
+                        (context, state) =>
+                            LinesPage(typeName: state.pathParameters['type']!),
+                    routes: [
+                      GoRoute(
+                        path: ':line',
+                        parentNavigatorKey: rootKey,
+                        builder:
+                            (context, state) => StopsPage(
+                              typeName: state.pathParameters['type']!,
+                              lineCode: state.pathParameters['line']!,
+                            ),
+                      ),
+                    ],
+                  ),
+                ],
               ),
             ],
           ),
