@@ -16,4 +16,7 @@ class RouteNames {
   static const hubs = '/hubs';
 
   static String hubOf(String id) => '$hubs/${Uri.encodeComponent(id)}';
+  static String placePicker(String field) => '$search/place?field=$field';
+  static const timePicker = '$search/time';
+  static const preferences = '$search/preferences';
 }

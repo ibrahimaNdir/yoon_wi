@@ -15,7 +15,7 @@ void main() {
   testWidgets('la barre du bas change de page', (tester) async {
     await tester.pumpWidget(const YoonWiApp());
     await tester.pumpAndSettle();
-    expect(find.textContaining('étape F7'), findsOneWidget);
+    expect(find.text('Où allez-vous aujourd’hui ?'), findsOneWidget);
 
     await tester.tap(find.text('Réseaux'));
     await tester.pumpAndSettle();
