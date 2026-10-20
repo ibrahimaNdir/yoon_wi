@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:yoon_wi/features/hubs/presentation/pages/hub_page.dart';
 import 'package:go_router/go_router.dart';
 import 'package:yoon_wi/core/router/app_shell.dart';
 import 'package:yoon_wi/core/router/route_names.dart';
@@ -25,6 +26,11 @@ GoRouter createAppRouter({bool showOnboarding = false}) {
       GoRoute(
         path: RouteNames.permissions,
         builder: (context, state) => const PermissionsPage(),
+      ),
+      GoRoute(
+        path: '${RouteNames.hubs}/:id',
+        builder:
+            (context, state) => HubPage(hubId: state.pathParameters['id']!),
       ),
       StatefulShellRoute.indexedStack(
         builder:

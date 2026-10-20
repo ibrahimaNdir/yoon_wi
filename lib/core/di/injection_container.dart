@@ -17,6 +17,13 @@ import 'package:yoon_wi/features/onboarding/domain/repositories/onboarding_repos
 import 'package:yoon_wi/features/onboarding/domain/usecases/get_onboarding_seen.dart';
 import 'package:yoon_wi/features/onboarding/domain/usecases/mark_onboarding_seen.dart';
 import 'package:yoon_wi/features/onboarding/presentation/bloc/onboarding_cubit.dart';
+import 'package:yoon_wi/features/hubs/data/datasources/hub_local_datasource.dart';
+import 'package:yoon_wi/features/hubs/data/repositories/hub_repository_impl.dart';
+import 'package:yoon_wi/features/hubs/domain/repositories/hub_repository.dart';
+import 'package:yoon_wi/features/hubs/domain/usecases/get_hub.dart';
+import 'package:yoon_wi/features/hubs/domain/usecases/get_hubs.dart';
+import 'package:yoon_wi/features/hubs/presentation/bloc/hub_cubit.dart';
+import 'package:yoon_wi/features/hubs/presentation/bloc/hubs_cubit.dart';
 
 final sl = GetIt.instance;
 
@@ -50,4 +57,14 @@ Future<void> initDependencies() async {
   sl.registerFactory(() => TypesCubit(sl()));
   sl.registerFactory(() => LinesCubit(sl()));
   sl.registerFactory(() => StopsCubit(sl()));
+
+  // Hubs
+  sl.registerLazySingleton<HubLocalDataSource>(
+    () => HubLocalDataSourceImpl(sl()),
+  );
+  sl.registerLazySingleton<HubRepository>(() => HubRepositoryImpl(sl()));
+  sl.registerLazySingleton(() => GetHubs(sl()));
+  sl.registerLazySingleton(() => GetHub(sl()));
+  sl.registerFactory(() => HubsCubit(sl()));
+  sl.registerFactory(() => HubCubit(sl()));
 }
