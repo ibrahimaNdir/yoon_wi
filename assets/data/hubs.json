@@ -1,0 +1,47 @@
+{
+  "version": 1,
+  "hubs": [
+    {
+      "id": "colobane",
+      "nom": "Colobane",
+      "reseaux": ["Bus Tata", "BRT", "Dakar Dem Dikk"],
+      "correspondances": [
+        { "de": "Bus Tata", "vers": "BRT", "marche_min": 4 },
+        { "de": "BRT", "vers": "Dakar Dem Dikk", "marche_min": 3 }
+      ]
+    },
+    {
+      "id": "ucad",
+      "nom": "UCAD",
+      "reseaux": ["Bus Tata", "Dakar Dem Dikk"],
+      "correspondances": [
+        { "de": "Bus Tata", "vers": "Dakar Dem Dikk", "marche_min": 3 }
+      ]
+    },
+    {
+      "id": "petersen",
+      "nom": "Petersen",
+      "reseaux": ["BRT", "Dakar Dem Dikk", "TER"],
+      "correspondances": [
+        { "de": "BRT", "vers": "Dakar Dem Dikk", "marche_min": 2 },
+        { "de": "BRT", "vers": "TER", "marche_min": 5 }
+      ]
+    },
+    {
+      "id": "liberte-6",
+      "nom": "Liberté 6",
+      "reseaux": ["Bus Tata", "Dakar Dem Dikk"],
+      "correspondances": [
+        { "de": "Bus Tata", "vers": "Dakar Dem Dikk", "marche_min": 3 }
+      ]
+    },
+    {
+      "id": "guediawaye",
+      "nom": "Guédiawaye",
+      "reseaux": ["BRT", "Bus Tata"],
+      "correspondances": [
+        { "de": "Bus Tata", "vers": "BRT", "marche_min": 2 }
+      ]
+    }
+  ]
+}

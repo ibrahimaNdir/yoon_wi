@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "lieux": [
+    { "id": "ucad", "nom": "UCAD", "zone": "Fann", "populaire": true, "alias": ["université", "cheikh anta diop"] },
+    { "id": "colobane", "nom": "Gare de Colobane", "zone": "Colobane", "populaire": true, "alias": ["colobane"] },
+    { "id": "hlm", "nom": "Marché HLM", "zone": "HLM", "populaire": true, "alias": ["hlm"] },
+    { "id": "petersen", "nom": "Petersen", "zone": "Centre-ville", "populaire": true, "alias": [] },
+    { "id": "liberte-6", "nom": "Liberté 6", "zone": "Liberté", "populaire": true, "alias": ["rond-point liberté 6"] },
+    { "id": "guediawaye", "nom": "Guédiawaye", "zone": "Banlieue", "populaire": true, "alias": [] },
+    { "id": "parcelles", "nom": "Parcelles Assainies", "zone": "Parcelles", "populaire": true, "alias": ["parcelles"] },
+    { "id": "sandaga", "nom": "Sandaga", "zone": "Plateau", "populaire": true, "alias": ["marché sandaga"] },
+    { "id": "patte-d-oie", "nom": "Patte d’Oie", "zone": "Patte d’Oie", "populaire": false, "alias": [] },
+    { "id": "pikine", "nom": "Pikine", "zone": "Banlieue", "populaire": false, "alias": [] }
+  ]
+}
