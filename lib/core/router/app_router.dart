@@ -16,6 +16,8 @@ import 'package:yoon_wi/features/search/presentation/pages/place_picker_page.dar
 import 'package:yoon_wi/features/search/presentation/pages/preferences_page.dart';
 import 'package:yoon_wi/features/search/presentation/pages/time_picker_page.dart';
 import 'package:yoon_wi/features/itinerary/presentation/pages/itinerary_results_page.dart';
+import 'package:yoon_wi/features/itinerary/domain/entities/itinerary.dart';
+import 'package:yoon_wi/features/itinerary/presentation/pages/roadmap_page.dart';
 
 GoRouter createAppRouter({bool showOnboarding = false}) {
   final rootKey = GlobalKey<NavigatorState>();
@@ -74,6 +76,16 @@ GoRouter createAppRouter({bool showOnboarding = false}) {
                     path: 'results',
                     parentNavigatorKey: rootKey,
                     builder: (context, state) => const ItineraryResultsPage(),
+                  ),
+                  GoRoute(
+                    path: 'roadmap',
+                    parentNavigatorKey: rootKey,
+                    builder: (context, state) {
+                      final extra = state.extra;
+                      return RoadmapPage(
+                        itinerary: extra is Itinerary ? extra : null,
+                      );
+                    },
                   ),
                 ],
               ),

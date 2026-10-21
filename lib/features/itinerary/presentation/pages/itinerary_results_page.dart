@@ -111,12 +111,9 @@ class ItineraryResultsPage extends StatelessWidget {
                         return OptionsView(
                           itineraries: itineraries,
                           onSelect:
-                              (_) => ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
-                                  content: Text(
-                                    'La feuille de route arrive à l’étape F10.',
-                                  ),
-                                ),
+                              (itinerary) => context.push(
+                                RouteNames.roadmap,
+                                extra: itinerary,
                               ),
                         );
                     }
