@@ -117,13 +117,7 @@ class SearchPage extends StatelessWidget {
                     label: 'Voir les itinéraires',
                     onPressed:
                         form.canSearch
-                            ? () => ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(
-                                content: Text(
-                                  'Le calcul d’itinéraire arrive aux étapes F8 et F9.',
-                                ),
-                              ),
-                            )
+                            ? () => context.push(RouteNames.results)
                             : null,
                   ),
                   const SizedBox(height: 24),
