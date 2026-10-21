@@ -12,6 +12,7 @@ class ItineraryStep extends Equatable {
     required this.maxMinutes,
     this.mode,
     this.lineName,
+    this.lineCode,
     this.stopsCount = 0,
     this.waitMinMinutes = 0,
     this.waitMaxMinutes = 0,
@@ -28,6 +29,9 @@ class ItineraryStep extends Equatable {
 
   final TransportMode? mode;
   final String? lineName;
+
+  /// Code de la ligne dans les données (sert à ouvrir sa page).
+  final String? lineCode;
   final int stopsCount;
 
   /// Attente avant de monter (étapes de type trajet seulement).
@@ -49,6 +53,7 @@ class ItineraryStep extends Equatable {
     maxMinutes,
     mode,
     lineName,
+    lineCode,
     stopsCount,
     waitMinMinutes,
     waitMaxMinutes,

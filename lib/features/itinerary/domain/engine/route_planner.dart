@@ -137,7 +137,7 @@ class LocalRoutePlanner implements RoutePlanner {
     ItineraryStep closeRide(StopNode end) => ItineraryStep(
       kind: StepKind.ride,
       mode: rideStart.mode,
-      lineName: rideStart.line.name,
+      lineCode: rideStart.line.code,
       from: rideStart.stopName,
       to: end.stopName,
       stopsCount: hops,
