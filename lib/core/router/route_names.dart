@@ -19,4 +19,5 @@ class RouteNames {
   static String placePicker(String field) => '$search/place?field=$field';
   static const timePicker = '$search/time';
   static const preferences = '$search/preferences';
+  static const results = '$search/results';
 }

@@ -34,6 +34,7 @@ import 'package:yoon_wi/features/itinerary/data/repositories/itinerary_repositor
 import 'package:yoon_wi/features/itinerary/domain/engine/route_planner.dart';
 import 'package:yoon_wi/features/itinerary/domain/repositories/itinerary_repository.dart';
 import 'package:yoon_wi/features/itinerary/domain/usecases/find_itineraries.dart';
+import 'package:yoon_wi/features/itinerary/presentation/bloc/itinerary_cubit.dart';
 
 final sl = GetIt.instance;
 
@@ -94,4 +95,5 @@ Future<void> initDependencies() async {
     () => ItineraryRepositoryImpl(networks: sl(), hubs: sl(), planner: sl()),
   );
   sl.registerLazySingleton(() => FindItineraries(sl()));
+  sl.registerFactory(() => ItineraryCubit(sl()));
 }
