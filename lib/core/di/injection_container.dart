@@ -45,6 +45,13 @@ import 'package:yoon_wi/features/favorites/domain/usecases/get_favorites.dart';
 import 'package:yoon_wi/features/favorites/domain/usecases/remove_favorite.dart';
 import 'package:yoon_wi/features/favorites/domain/usecases/save_trip.dart';
 import 'package:yoon_wi/features/favorites/presentation/bloc/favorites_cubit.dart';
+import 'package:yoon_wi/features/history/data/datasources/history_local_datasource.dart';
+import 'package:yoon_wi/features/history/data/repositories/history_repository_impl.dart';
+import 'package:yoon_wi/features/history/domain/repositories/history_repository.dart';
+import 'package:yoon_wi/features/history/domain/usecases/add_to_history.dart';
+import 'package:yoon_wi/features/history/domain/usecases/clear_history.dart';
+import 'package:yoon_wi/features/history/domain/usecases/get_history.dart';
+import 'package:yoon_wi/features/history/presentation/bloc/history_cubit.dart';
 
 final sl = GetIt.instance;
 
@@ -131,4 +138,19 @@ Future<void> initDependencies() async {
       removeTrip: sl(),
     )..load(),
   );
+
+  // Historique
+  sl.registerLazySingleton<HistoryLocalDataSource>(
+          () => HistoryLocalDataSourceImpl(sl()));
+  sl.registerLazySingleton<HistoryRepository>(
+          () => HistoryRepositoryImpl(sl()));
+  sl.registerLazySingleton(() => GetHistory(sl()));
+  sl.registerLazySingleton(() => AddToHistory(sl()));
+  sl.registerLazySingleton(() => ClearHistory(sl()));
+  // Un seul cubit partagé, chargé à sa première utilisation
+  sl.registerLazySingleton(() => HistoryCubit(
+    getHistory: sl(),
+    addToHistory: sl(),
+    clearHistory: sl(),
+  )..load());
 }

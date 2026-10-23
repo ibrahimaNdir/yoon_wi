@@ -14,6 +14,7 @@ import 'package:yoon_wi/features/search/presentation/bloc/search_form_cubit.dart
 import 'package:yoon_wi/features/search/presentation/search_labels.dart';
 import 'package:yoon_wi/shared/widgets/empty_state.dart';
 import 'package:yoon_wi/shared/widgets/primary_button.dart';
+import 'package:yoon_wi/features/history/presentation/bloc/history_cubit.dart';
 
 class ItineraryResultsPage extends StatelessWidget {
   const ItineraryResultsPage({super.key});
@@ -110,11 +111,16 @@ class ItineraryResultsPage extends StatelessWidget {
                         }
                         return OptionsView(
                           itineraries: itineraries,
-                          onSelect:
-                              (itinerary) => context.push(
-                                RouteNames.roadmap,
-                                extra: itinerary,
-                              ),
+                          onSelect: (itinerary) {
+                            sl<HistoryCubit>().add(
+                              from: form.departure!,
+                              to: form.arrival!,
+                              fare: itinerary.fare,
+                              minMinutes: itinerary.minMinutes,
+                              maxMinutes: itinerary.maxMinutes,
+                            );
+                            context.push(RouteNames.roadmap, extra: itinerary);
+                          },
                         );
                     }
                   },

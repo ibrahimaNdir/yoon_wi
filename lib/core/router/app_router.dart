@@ -20,6 +20,7 @@ import 'package:yoon_wi/features/itinerary/domain/entities/itinerary.dart';
 import 'package:yoon_wi/features/itinerary/presentation/pages/roadmap_page.dart';
 
 import 'package:yoon_wi/features/search/domain/entities/place.dart';
+import 'package:yoon_wi/features/history/presentation/pages/history_page.dart';
 
 GoRouter createAppRouter({bool showOnboarding = false}) {
   final rootKey = GlobalKey<NavigatorState>();
@@ -41,10 +42,14 @@ GoRouter createAppRouter({bool showOnboarding = false}) {
         builder:
             (context, state) => HubPage(hubId: state.pathParameters['id']!),
       ),
+      GoRoute(
+        path: RouteNames.history,
+        builder: (context, state) => const HistoryPage(),
+      ),
       StatefulShellRoute.indexedStack(
         builder:
             (context, state, navigationShell) =>
-                AppShell(navigationShell: navigationShell),
+            AppShell(navigationShell: navigationShell),
         branches: [
           StatefulShellBranch(
             routes: [
@@ -58,11 +63,11 @@ GoRouter createAppRouter({bool showOnboarding = false}) {
                     parentNavigatorKey: rootKey,
                     builder:
                         (context, state) => PlacePickerPage(
-                          field:
-                              state.uri.queryParameters['field'] == 'to'
-                                  ? SearchField.to
-                                  : SearchField.from,
-                        ),
+                      field:
+                      state.uri.queryParameters['field'] == 'to'
+                          ? SearchField.to
+                          : SearchField.from,
+                    ),
                   ),
                   GoRoute(
                     path: 'time',
@@ -105,16 +110,16 @@ GoRouter createAppRouter({bool showOnboarding = false}) {
                     parentNavigatorKey: rootKey,
                     builder:
                         (context, state) =>
-                            LinesPage(typeName: state.pathParameters['type']!),
+                        LinesPage(typeName: state.pathParameters['type']!),
                     routes: [
                       GoRoute(
                         path: ':line',
                         parentNavigatorKey: rootKey,
                         builder:
                             (context, state) => StopsPage(
-                              typeName: state.pathParameters['type']!,
-                              lineCode: state.pathParameters['line']!,
-                            ),
+                          typeName: state.pathParameters['type']!,
+                          lineCode: state.pathParameters['line']!,
+                        ),
                       ),
                     ],
                   ),
