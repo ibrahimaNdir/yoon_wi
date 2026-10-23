@@ -14,6 +14,7 @@ import 'package:yoon_wi/features/search/presentation/search_labels.dart';
 import 'package:yoon_wi/features/search/presentation/widgets/place_field.dart';
 import 'package:yoon_wi/features/search/presentation/widgets/popular_places_chips.dart';
 import 'package:yoon_wi/shared/widgets/primary_button.dart';
+import 'package:yoon_wi/features/search/presentation/widgets/recent_trips_list.dart';
 
 class SearchPage extends StatelessWidget {
   const SearchPage({super.key});
@@ -75,7 +76,7 @@ class SearchPage extends StatelessWidget {
                       Expanded(
                         child: Semantics(
                           label:
-                              'Heure du trajet : ${timeShortLabel(form.time)}',
+                          'Heure du trajet : ${timeShortLabel(form.time)}',
                           excludeSemantics: true,
                           button: true,
                           child: OutlinedButton.icon(
@@ -94,7 +95,7 @@ class SearchPage extends StatelessWidget {
                       Expanded(
                         child: Semantics(
                           label:
-                              'Préférences : '
+                          'Préférences : '
                               '${priorityShortLabel(form.preferences.priority)}',
                           excludeSemantics: true,
                           button: true,
@@ -116,9 +117,9 @@ class SearchPage extends StatelessWidget {
                   PrimaryButton(
                     label: 'Voir les itinéraires',
                     onPressed:
-                        form.canSearch
-                            ? () => context.push(RouteNames.results)
-                            : null,
+                    form.canSearch
+                        ? () => context.push(RouteNames.results)
+                        : null,
                   ),
                   const SizedBox(height: 24),
                   Semantics(
@@ -138,11 +139,13 @@ class SearchPage extends StatelessWidget {
                         places: state.data!,
                         onSelected:
                             (place) => context
-                                .read<SearchFormCubit>()
-                                .fillNextEmpty(place),
+                            .read<SearchFormCubit>()
+                            .fillNextEmpty(place),
                       );
                     },
                   ),
+                  const SizedBox(height: 16),
+                  const RecentTripsList(),
                 ],
               );
             },

@@ -19,4 +19,12 @@ class PlaceModel extends Place {
       aliases: JsonParsers.strings(json, 'alias'),
     );
   }
+
+  static Map<String, dynamic> toJson(Place p) => {
+    'id': p.id,
+    'nom': p.name,
+    'zone': p.zone,
+    'populaire': p.isPopular,
+    'alias': p.aliases,
+  };
 }
