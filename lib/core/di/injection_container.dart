@@ -37,6 +37,14 @@ import 'package:yoon_wi/features/itinerary/domain/usecases/find_itineraries.dart
 import 'package:yoon_wi/features/itinerary/presentation/bloc/itinerary_cubit.dart';
 import 'package:yoon_wi/core/services/share_service.dart';
 import 'package:yoon_wi/features/itinerary/domain/usecases/share_itinerary.dart';
+import 'package:yoon_wi/features/favorites/data/datasources/favorites_local_datasource.dart';
+import 'package:yoon_wi/features/favorites/data/repositories/favorites_repository_impl.dart';
+import 'package:yoon_wi/features/favorites/domain/repositories/favorites_repository.dart';
+import 'package:yoon_wi/features/favorites/domain/usecases/add_favorite_place.dart';
+import 'package:yoon_wi/features/favorites/domain/usecases/get_favorites.dart';
+import 'package:yoon_wi/features/favorites/domain/usecases/remove_favorite.dart';
+import 'package:yoon_wi/features/favorites/domain/usecases/save_trip.dart';
+import 'package:yoon_wi/features/favorites/presentation/bloc/favorites_cubit.dart';
 
 final sl = GetIt.instance;
 
@@ -100,4 +108,27 @@ Future<void> initDependencies() async {
   sl.registerFactory(() => ItineraryCubit(sl()));
   sl.registerLazySingleton<ShareService>(() => SharePlusShareService());
   sl.registerLazySingleton(() => ShareItinerary(sl()));
+
+  // Favoris
+  sl.registerLazySingleton<FavoritesLocalDataSource>(
+    () => FavoritesLocalDataSourceImpl(sl()),
+  );
+  sl.registerLazySingleton<FavoritesRepository>(
+    () => FavoritesRepositoryImpl(sl()),
+  );
+  sl.registerLazySingleton(() => GetFavorites(sl()));
+  sl.registerLazySingleton(() => AddFavoritePlace(sl()));
+  sl.registerLazySingleton(() => RemoveFavoritePlace(sl()));
+  sl.registerLazySingleton(() => SaveTrip(sl()));
+  sl.registerLazySingleton(() => RemoveSavedTrip(sl()));
+  // Un seul cubit partagé, chargé à sa première utilisation
+  sl.registerLazySingleton(
+    () => FavoritesCubit(
+      getFavorites: sl(),
+      addPlace: sl(),
+      removePlace: sl(),
+      saveTrip: sl(),
+      removeTrip: sl(),
+    )..load(),
+  );
 }

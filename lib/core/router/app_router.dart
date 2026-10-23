@@ -19,6 +19,8 @@ import 'package:yoon_wi/features/itinerary/presentation/pages/itinerary_results_
 import 'package:yoon_wi/features/itinerary/domain/entities/itinerary.dart';
 import 'package:yoon_wi/features/itinerary/presentation/pages/roadmap_page.dart';
 
+import 'package:yoon_wi/features/search/domain/entities/place.dart';
+
 GoRouter createAppRouter({bool showOnboarding = false}) {
   final rootKey = GlobalKey<NavigatorState>();
 
@@ -125,6 +127,19 @@ GoRouter createAppRouter({bool showOnboarding = false}) {
               GoRoute(
                 path: RouteNames.favorites,
                 builder: (context, state) => const FavoritesPage(),
+                routes: [
+                  GoRoute(
+                    path: 'add',
+                    parentNavigatorKey: rootKey,
+                    builder: (context, state) {
+                      final extra = state.extra;
+                      return PlacePickerPage(
+                        field: SearchField.to,
+                        onPicked: extra is ValueChanged<Place> ? extra : null,
+                      );
+                    },
+                  ),
+                ],
               ),
             ],
           ),

@@ -14,9 +14,10 @@ import 'package:yoon_wi/shared/widgets/empty_state.dart';
 import 'package:yoon_wi/shared/widgets/loading_skeleton.dart';
 
 class PlacePickerPage extends StatefulWidget {
-  const PlacePickerPage({super.key, required this.field});
+  const PlacePickerPage({super.key, required this.field, this.onPicked});
 
   final SearchField field;
+  final ValueChanged<Place>? onPicked;
 
   @override
   State<PlacePickerPage> createState() => _PlacePickerPageState();
@@ -39,7 +40,13 @@ class _PlacePickerPageState extends State<PlacePickerPage> {
       child: Builder(
         builder:
             (context) => Scaffold(
-              appBar: AppBar(title: Text(isFrom ? 'Départ' : 'Arrivée')),
+              appBar: AppBar(
+                title: Text(
+                  widget.onPicked != null
+                      ? 'Lieu favori'
+                      : (isFrom ? 'Départ' : 'Arrivée'),
+                ),
+              ),
               body: SafeArea(
                 child: Column(
                   children: [
