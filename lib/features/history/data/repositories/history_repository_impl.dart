@@ -21,13 +21,15 @@ class HistoryRepositoryImpl implements HistoryRepository {
 
   @override
   Future<Either<Failure, List<TripHistoryEntry>>> add(
-      TripHistoryEntry entry) async {
+    TripHistoryEntry entry,
+  ) async {
     try {
       final current = await _local.read();
-      final updated = [
-        entry,
-        ...current.where((e) => e.id != entry.id),
-      ].take(maxEntries).toList();
+      final updated =
+          [
+            entry,
+            ...current.where((e) => e.id != entry.id),
+          ].take(maxEntries).toList();
       await _local.write(updated);
       return Right(updated);
     } catch (_) {

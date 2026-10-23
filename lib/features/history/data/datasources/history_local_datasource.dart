@@ -23,8 +23,9 @@ class HistoryLocalDataSourceImpl implements HistoryLocalDataSource {
       final entries = <TripHistoryEntry>[];
       for (final item in jsonDecode(raw) as List) {
         try {
-          entries.add(HistoryModel.fromJson(
-              Map<String, dynamic>.from(item as Map)));
+          entries.add(
+            HistoryModel.fromJson(Map<String, dynamic>.from(item as Map)),
+          );
         } catch (_) {
           // Une ligne illisible est ignorée, les autres sont gardées.
         }
@@ -38,6 +39,8 @@ class HistoryLocalDataSourceImpl implements HistoryLocalDataSource {
   @override
   Future<void> write(List<TripHistoryEntry> entries) async {
     await _prefs.setString(
-        _key, jsonEncode(entries.map(HistoryModel.toJson).toList()));
+      _key,
+      jsonEncode(entries.map(HistoryModel.toJson).toList()),
+    );
   }
 }

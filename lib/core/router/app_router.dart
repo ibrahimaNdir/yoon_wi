@@ -21,6 +21,11 @@ import 'package:yoon_wi/features/itinerary/presentation/pages/roadmap_page.dart'
 
 import 'package:yoon_wi/features/search/domain/entities/place.dart';
 import 'package:yoon_wi/features/history/presentation/pages/history_page.dart';
+import 'package:yoon_wi/features/guidance/domain/entities/trip_summary.dart';
+import 'package:yoon_wi/features/guidance/presentation/pages/arrival_page.dart';
+import 'package:yoon_wi/features/guidance/presentation/pages/disruption_alert_page.dart';
+import 'package:yoon_wi/features/guidance/presentation/pages/guidance_page.dart';
+import 'package:yoon_wi/features/itinerary/domain/entities/step.dart';
 
 GoRouter createAppRouter({bool showOnboarding = false}) {
   final rootKey = GlobalKey<NavigatorState>();
@@ -49,7 +54,7 @@ GoRouter createAppRouter({bool showOnboarding = false}) {
       StatefulShellRoute.indexedStack(
         builder:
             (context, state, navigationShell) =>
-            AppShell(navigationShell: navigationShell),
+                AppShell(navigationShell: navigationShell),
         branches: [
           StatefulShellBranch(
             routes: [
@@ -63,11 +68,11 @@ GoRouter createAppRouter({bool showOnboarding = false}) {
                     parentNavigatorKey: rootKey,
                     builder:
                         (context, state) => PlacePickerPage(
-                      field:
-                      state.uri.queryParameters['field'] == 'to'
-                          ? SearchField.to
-                          : SearchField.from,
-                    ),
+                          field:
+                              state.uri.queryParameters['field'] == 'to'
+                                  ? SearchField.to
+                                  : SearchField.from,
+                        ),
                   ),
                   GoRoute(
                     path: 'time',
@@ -94,6 +99,36 @@ GoRouter createAppRouter({bool showOnboarding = false}) {
                       );
                     },
                   ),
+                  GoRoute(
+                    path: 'guidance',
+                    parentNavigatorKey: rootKey,
+                    builder: (context, state) {
+                      final extra = state.extra;
+                      return GuidancePage(
+                        itinerary: extra is Itinerary ? extra : null,
+                      );
+                    },
+                  ),
+                  GoRoute(
+                    path: 'arrival',
+                    parentNavigatorKey: rootKey,
+                    builder: (context, state) {
+                      final extra = state.extra;
+                      return ArrivalPage(
+                        summary: extra is TripSummary ? extra : null,
+                      );
+                    },
+                  ),
+                  GoRoute(
+                    path: 'alert',
+                    parentNavigatorKey: rootKey,
+                    builder: (context, state) {
+                      final extra = state.extra;
+                      return DisruptionAlertPage(
+                        step: extra is ItineraryStep ? extra : null,
+                      );
+                    },
+                  ),
                 ],
               ),
             ],
@@ -110,16 +145,16 @@ GoRouter createAppRouter({bool showOnboarding = false}) {
                     parentNavigatorKey: rootKey,
                     builder:
                         (context, state) =>
-                        LinesPage(typeName: state.pathParameters['type']!),
+                            LinesPage(typeName: state.pathParameters['type']!),
                     routes: [
                       GoRoute(
                         path: ':line',
                         parentNavigatorKey: rootKey,
                         builder:
                             (context, state) => StopsPage(
-                          typeName: state.pathParameters['type']!,
-                          lineCode: state.pathParameters['line']!,
-                        ),
+                              typeName: state.pathParameters['type']!,
+                              lineCode: state.pathParameters['line']!,
+                            ),
                       ),
                     ],
                   ),

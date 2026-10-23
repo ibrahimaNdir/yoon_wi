@@ -6,7 +6,10 @@ void main() {
 
   test('classe un trajet selon son jour', () {
     expect(groupOf(DateTime(2026, 10, 20, 0, 5), now), HistoryGroup.today);
-    expect(groupOf(DateTime(2026, 10, 19, 23, 50), now), HistoryGroup.yesterday);
+    expect(
+      groupOf(DateTime(2026, 10, 19, 23, 50), now),
+      HistoryGroup.yesterday,
+    );
     expect(groupOf(DateTime(2026, 10, 16, 12), now), HistoryGroup.thisWeek);
     expect(groupOf(DateTime(2026, 10, 13, 12), now), HistoryGroup.older);
   });
@@ -16,8 +19,14 @@ void main() {
   });
 
   test('l’heure pour aujourd’hui, la date ensuite', () {
-    expect(timeLabel(DateTime(2026, 10, 20, 7, 5), HistoryGroup.today), '07:05');
-    expect(timeLabel(DateTime(2026, 10, 13, 7, 5), HistoryGroup.older), '13/10');
+    expect(
+      timeLabel(DateTime(2026, 10, 20, 7, 5), HistoryGroup.today),
+      '07:05',
+    );
+    expect(
+      timeLabel(DateTime(2026, 10, 13, 7, 5), HistoryGroup.older),
+      '13/10',
+    );
   });
 
   test('les libellés des groupes', () {

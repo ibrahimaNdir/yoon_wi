@@ -7,7 +7,12 @@ import 'package:yoon_wi/features/search/domain/entities/place.dart';
 
 void main() {
   const a = Place(
-      id: 'a', name: 'A', zone: 'z', isPopular: true, aliases: ['alpha']);
+    id: 'a',
+    name: 'A',
+    zone: 'z',
+    isPopular: true,
+    aliases: ['alpha'],
+  );
   const b = Place(id: 'b', name: 'B', zone: 'z', isPopular: false);
   const c = Place(id: 'c', name: 'C', zone: 'z', isPopular: false);
 
@@ -24,8 +29,7 @@ void main() {
   late HistoryRepositoryImpl repository;
 
   Future<List<TripHistoryEntry>> history() async =>
-      (await repository.getHistory())
-          .getOrElse(() => <TripHistoryEntry>[]);
+      (await repository.getHistory()).getOrElse(() => <TripHistoryEntry>[]);
 
   setUp(() async {
     SharedPreferences.setMockInitialValues({});
@@ -37,15 +41,17 @@ void main() {
     expect(await history(), isEmpty);
   });
 
-  test('le dernier trajet est en premier et les lieux sont conservés',
-          () async {
-        await repository.add(entry(a, b, DateTime(2026, 10, 1, 8)));
-        await repository.add(entry(b, c, DateTime(2026, 10, 1, 9)));
+  test(
+    'le dernier trajet est en premier et les lieux sont conservés',
+    () async {
+      await repository.add(entry(a, b, DateTime(2026, 10, 1, 8)));
+      await repository.add(entry(b, c, DateTime(2026, 10, 1, 9)));
 
-        final result = await history();
-        expect(result.map((e) => e.id), ['b>c', 'a>b']);
-        expect(result.last.from.aliases, ['alpha']);
-      });
+      final result = await history();
+      expect(result.map((e) => e.id), ['b>c', 'a>b']);
+      expect(result.last.from.aliases, ['alpha']);
+    },
+  );
 
   test('un trajet répété remonte en haut sans doublon', () async {
     await repository.add(entry(a, b, DateTime(2026, 10, 1, 8)));
@@ -59,8 +65,7 @@ void main() {
 
   test('l’historique garde au maximum 50 trajets', () async {
     for (var i = 0; i < 55; i++) {
-      final from = Place(
-          id: 'p$i', name: 'P$i', zone: 'z', isPopular: false);
+      final from = Place(id: 'p$i', name: 'P$i', zone: 'z', isPopular: false);
       await repository.add(entry(from, b, DateTime(2026, 10, 1, 8, i)));
     }
     final result = await history();

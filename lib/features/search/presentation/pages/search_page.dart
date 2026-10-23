@@ -76,7 +76,7 @@ class SearchPage extends StatelessWidget {
                       Expanded(
                         child: Semantics(
                           label:
-                          'Heure du trajet : ${timeShortLabel(form.time)}',
+                              'Heure du trajet : ${timeShortLabel(form.time)}',
                           excludeSemantics: true,
                           button: true,
                           child: OutlinedButton.icon(
@@ -95,7 +95,7 @@ class SearchPage extends StatelessWidget {
                       Expanded(
                         child: Semantics(
                           label:
-                          'Préférences : '
+                              'Préférences : '
                               '${priorityShortLabel(form.preferences.priority)}',
                           excludeSemantics: true,
                           button: true,
@@ -117,9 +117,9 @@ class SearchPage extends StatelessWidget {
                   PrimaryButton(
                     label: 'Voir les itinéraires',
                     onPressed:
-                    form.canSearch
-                        ? () => context.push(RouteNames.results)
-                        : null,
+                        form.canSearch
+                            ? () => context.push(RouteNames.results)
+                            : null,
                   ),
                   const SizedBox(height: 24),
                   Semantics(
@@ -139,8 +139,8 @@ class SearchPage extends StatelessWidget {
                         places: state.data!,
                         onSelected:
                             (place) => context
-                            .read<SearchFormCubit>()
-                            .fillNextEmpty(place),
+                                .read<SearchFormCubit>()
+                                .fillNextEmpty(place),
                       );
                     },
                   ),

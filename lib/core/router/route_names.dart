@@ -23,4 +23,7 @@ class RouteNames {
   static const roadmap = '$search/roadmap';
   static const favoritePicker = '$favorites/add';
   static const history = '/history';
+  static const guidance = '$search/guidance';
+  static const arrival = '$search/arrival';
+  static const alert = '$search/alert';
 }
