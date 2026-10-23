@@ -12,6 +12,10 @@ import 'package:yoon_wi/features/itinerary/presentation/widgets/timeline_step.da
 import 'package:yoon_wi/features/search/presentation/bloc/search_form_cubit.dart';
 import 'package:yoon_wi/shared/widgets/empty_state.dart';
 import 'package:yoon_wi/shared/widgets/primary_button.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:yoon_wi/core/bloc/load_state.dart';
+import 'package:yoon_wi/features/favorites/domain/entities/favorites.dart';
+import 'package:yoon_wi/features/favorites/presentation/bloc/favorites_cubit.dart';
 
 class RoadmapPage extends StatelessWidget {
   const RoadmapPage({super.key, required this.itinerary});
@@ -42,12 +46,6 @@ class RoadmapPage extends StatelessWidget {
             icon: Icons.route,
             title: 'Itinéraire introuvable',
             message: 'Relancez une recherche pour obtenir la feuille de route.',
-            actions: [
-              PrimaryButton(
-                label: 'Retour à la recherche',
-                onPressed: () => context.go(RouteNames.search),
-              ),
-            ],
           ),
         ),
       );
@@ -58,6 +56,20 @@ class RoadmapPage extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Feuille de route'),
         actions: [
+          BlocBuilder<FavoritesCubit, LoadState<Favorites>>(
+            bloc: sl<FavoritesCubit>(),
+            builder: (context, state) {
+              final saved = state.data?.isTripSaved(from.id, to.id) ?? false;
+              return IconButton(
+                tooltip:
+                    saved
+                        ? 'Retirer des trajets enregistrés'
+                        : 'Enregistrer ce trajet',
+                icon: Icon(saved ? Icons.star : Icons.star_border),
+                onPressed: () => sl<FavoritesCubit>().toggleTrip(from, to),
+              );
+            },
+          ),
           TextButton.icon(
             onPressed:
                 () =>

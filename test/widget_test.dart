@@ -23,7 +23,7 @@ void main() {
 
     await tester.tap(find.text('Favoris'));
     await tester.pumpAndSettle();
-    expect(find.textContaining('étape F11'), findsOneWidget);
+    expect(find.text('Trajets enregistrés'), findsOneWidget);
 
     await tester.tap(find.text('Profil'));
     await tester.pumpAndSettle();

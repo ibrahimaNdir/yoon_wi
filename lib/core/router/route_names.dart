@@ -21,4 +21,5 @@ class RouteNames {
   static const preferences = '$search/preferences';
   static const results = '$search/results';
   static const roadmap = '$search/roadmap';
+  static const favoritePicker = '$favorites/add';
 }
