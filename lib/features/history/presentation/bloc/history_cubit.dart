@@ -17,11 +17,11 @@ class HistoryCubit extends Cubit<LoadState<List<TripHistoryEntry>>> {
     required AddToHistory addToHistory,
     required ClearHistory clearHistory,
     DateTime Function()? clock,
-  })  : _get = getHistory,
-        _add = addToHistory,
-        _clear = clearHistory,
-        _clock = clock ?? DateTime.now,
-        super(const LoadState.loading());
+  }) : _get = getHistory,
+       _add = addToHistory,
+       _clear = clearHistory,
+       _clock = clock ?? DateTime.now,
+       super(const LoadState.loading());
 
   final GetHistory _get;
   final AddToHistory _add;
@@ -40,14 +40,18 @@ class HistoryCubit extends Cubit<LoadState<List<TripHistoryEntry>>> {
     required int minMinutes,
     required int maxMinutes,
   }) async {
-    _emit(await _add(TripHistoryEntry(
-      from: from,
-      to: to,
-      fare: fare,
-      minMinutes: minMinutes,
-      maxMinutes: maxMinutes,
-      at: _clock(),
-    )));
+    _emit(
+      await _add(
+        TripHistoryEntry(
+          from: from,
+          to: to,
+          fare: fare,
+          minMinutes: minMinutes,
+          maxMinutes: maxMinutes,
+          at: _clock(),
+        ),
+      ),
+    );
   }
 
   Future<void> clear() async => _emit(await _clear(const NoParams()));
@@ -55,8 +59,8 @@ class HistoryCubit extends Cubit<LoadState<List<TripHistoryEntry>>> {
   void _emit(Either<Failure, List<TripHistoryEntry>> result) {
     if (isClosed) return;
     result.fold(
-          (failure) => emit(LoadState.failure(failure.message)),
-          (entries) => emit(LoadState.success(entries)),
+      (failure) => emit(LoadState.failure(failure.message)),
+      (entries) => emit(LoadState.success(entries)),
     );
   }
 }

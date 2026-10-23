@@ -141,16 +141,18 @@ Future<void> initDependencies() async {
 
   // Historique
   sl.registerLazySingleton<HistoryLocalDataSource>(
-          () => HistoryLocalDataSourceImpl(sl()));
+    () => HistoryLocalDataSourceImpl(sl()),
+  );
   sl.registerLazySingleton<HistoryRepository>(
-          () => HistoryRepositoryImpl(sl()));
+    () => HistoryRepositoryImpl(sl()),
+  );
   sl.registerLazySingleton(() => GetHistory(sl()));
   sl.registerLazySingleton(() => AddToHistory(sl()));
   sl.registerLazySingleton(() => ClearHistory(sl()));
   // Un seul cubit partagé, chargé à sa première utilisation
-  sl.registerLazySingleton(() => HistoryCubit(
-    getHistory: sl(),
-    addToHistory: sl(),
-    clearHistory: sl(),
-  )..load());
+  sl.registerLazySingleton(
+    () =>
+        HistoryCubit(getHistory: sl(), addToHistory: sl(), clearHistory: sl())
+          ..load(),
+  );
 }

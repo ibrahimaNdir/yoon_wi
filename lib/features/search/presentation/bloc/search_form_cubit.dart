@@ -30,4 +30,8 @@ class SearchFormCubit extends Cubit<SearchFormState> {
 
   void setPreferences(SearchPreferences preferences) =>
       emit(state.copyWith(preferences: preferences));
+
+  /// Après un trajet terminé : nouvelle recherche, mêmes réglages.
+  void clearPlaces() =>
+      emit(SearchFormState(time: state.time, preferences: state.preferences));
 }

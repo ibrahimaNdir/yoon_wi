@@ -117,12 +117,7 @@ class RoadmapPage extends StatelessWidget {
               padding: const EdgeInsets.fromLTRB(24, 0, 24, 24),
               child: PrimaryButton(
                 label: 'Démarrer le guidage',
-                onPressed:
-                    () => ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text('Le guidage arrive à l’étape F13.'),
-                      ),
-                    ),
+                onPressed: () => context.push(RouteNames.guidance, extra: it),
               ),
             ),
           ],

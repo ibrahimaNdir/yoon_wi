@@ -33,8 +33,10 @@ class RecentTripsList extends StatelessWidget {
                 Expanded(
                   child: Semantics(
                     header: true,
-                    child: Text('Trajets récents',
-                        style: AppTextStyles.h2.copyWith(fontSize: 16)),
+                    child: Text(
+                      'Trajets récents',
+                      style: AppTextStyles.h2.copyWith(fontSize: 16),
+                    ),
                   ),
                 ),
                 TextButton(
@@ -46,10 +48,14 @@ class RecentTripsList extends StatelessWidget {
             for (final entry in entries.take(2))
               ListTile(
                 contentPadding: EdgeInsets.zero,
-                title: Text('${entry.from.name} → ${entry.to.name}',
-                    style: AppTextStyles.body),
-                trailing: Text(PriceFormatter.format(entry.fare),
-                    style: AppTextStyles.bodyMuted),
+                title: Text(
+                  '${entry.from.name} → ${entry.to.name}',
+                  style: AppTextStyles.body,
+                ),
+                trailing: Text(
+                  PriceFormatter.format(entry.fare),
+                  style: AppTextStyles.bodyMuted,
+                ),
                 onTap: () => openHistoryTrip(context, entry),
               ),
           ],

@@ -10,6 +10,6 @@ class AddToHistory extends UseCase<List<TripHistoryEntry>, TripHistoryEntry> {
 
   @override
   Future<Either<Failure, List<TripHistoryEntry>>> call(
-      TripHistoryEntry entry) =>
-      _repository.add(entry);
+    TripHistoryEntry entry,
+  ) => _repository.add(entry);
 }

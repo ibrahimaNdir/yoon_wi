@@ -22,21 +22,23 @@ class HistoryPage extends StatelessWidget {
   Future<void> _confirmClear(BuildContext context) async {
     final confirmed = await showDialog<bool>(
       context: context,
-      builder: (dialogContext) => AlertDialog(
-        title: const Text('Effacer l’historique ?'),
-        content: const Text(
-            'Tous les trajets récents seront supprimés de ce téléphone.'),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.of(dialogContext).pop(false),
-            child: const Text('Annuler'),
+      builder:
+          (dialogContext) => AlertDialog(
+            title: const Text('Effacer l’historique ?'),
+            content: const Text(
+              'Tous les trajets récents seront supprimés de ce téléphone.',
+            ),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.of(dialogContext).pop(false),
+                child: const Text('Annuler'),
+              ),
+              TextButton(
+                onPressed: () => Navigator.of(dialogContext).pop(true),
+                child: const Text('Effacer'),
+              ),
+            ],
           ),
-          TextButton(
-            onPressed: () => Navigator.of(dialogContext).pop(true),
-            child: const Text('Effacer'),
-          ),
-        ],
-      ),
     );
     if (confirmed == true) await sl<HistoryCubit>().clear();
   }
@@ -77,8 +79,7 @@ class HistoryPage extends StatelessWidget {
                   return EmptyState(
                     icon: Icons.history,
                     title: 'Aucun trajet pour l’instant',
-                    message:
-                    'Les trajets que vous consultez apparaîtront ici.',
+                    message: 'Les trajets que vous consultez apparaîtront ici.',
                     actions: [
                       PrimaryButton(
                         label: 'Faire une recherche',
@@ -103,27 +104,31 @@ class HistoryPage extends StatelessWidget {
                           for (final group in HistoryGroup.values)
                             if (groups.containsKey(group)) ...[
                               Padding(
-                                padding:
-                                const EdgeInsets.fromLTRB(0, 12, 0, 4),
+                                padding: const EdgeInsets.fromLTRB(0, 12, 0, 4),
                                 child: Semantics(
                                   header: true,
-                                  child: Text(groupLabel(group),
-                                      style: AppTextStyles.caption),
+                                  child: Text(
+                                    groupLabel(group),
+                                    style: AppTextStyles.caption,
+                                  ),
                                 ),
                               ),
                               for (final entry in groups[group]!)
                                 ListTile(
                                   contentPadding: EdgeInsets.zero,
                                   title: Text(
-                                      '${entry.from.name} → ${entry.to.name}',
-                                      style: AppTextStyles.body),
+                                    '${entry.from.name} → ${entry.to.name}',
+                                    style: AppTextStyles.body,
+                                  ),
                                   subtitle: Text(
                                     '${PriceFormatter.format(entry.fare)} · '
-                                        '${DurationFormatter.range(entry.minMinutes, entry.maxMinutes)}',
+                                    '${DurationFormatter.range(entry.minMinutes, entry.maxMinutes)}',
                                     style: AppTextStyles.bodyMuted,
                                   ),
-                                  trailing: Text(timeLabel(entry.at, group),
-                                      style: AppTextStyles.caption),
+                                  trailing: Text(
+                                    timeLabel(entry.at, group),
+                                    style: AppTextStyles.caption,
+                                  ),
                                   onTap: () => openHistoryTrip(context, entry),
                                 ),
                             ],
