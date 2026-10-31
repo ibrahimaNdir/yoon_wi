@@ -33,13 +33,28 @@ class SearchPage extends StatelessWidget {
               return ListView(
                 padding: const EdgeInsets.fromLTRB(24, 16, 24, 24),
                 children: [
-                  const Text(
-                    'Yoon Wi',
-                    style: TextStyle(
-                      fontSize: 28,
-                      fontWeight: FontWeight.w700,
-                      color: AppColors.primary,
-                    ),
+                  Row(
+                    children: [
+                      Semantics(
+                        label: 'Logo Yoon Wi',
+                        child: Image.asset(
+                          'assets/icons/logo.png',
+                          width: 36,
+                          height: 36,
+                          errorBuilder: (context, error, stackTrace) =>
+                          const SizedBox(width: 36, height: 36),
+                        ),
+                      ),
+                      const SizedBox(width: 10),
+                      const Text(
+                        'Yoon Wi',
+                        style: TextStyle(
+                          fontSize: 28,
+                          fontWeight: FontWeight.w700,
+                          color: AppColors.primary,
+                        ),
+                      ),
+                    ],
                   ),
                   const SizedBox(height: 16),
                   Semantics(
